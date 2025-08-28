@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <locale.h>
 
-#define TAMANHO 100000
+#define TAMANHO 10000
 
 void selectionSort(int *V, int N);
 void bubbleSort(int *V, int N);
@@ -12,6 +13,8 @@ void gerarArrayDescrescente(int *V, int N);
 
 int main(void)
 {
+    setlocale(LC_ALL, "Portuguese");
+
     int arr1[TAMANHO];
     int arr2[TAMANHO];
     int arr3[TAMANHO];
@@ -30,21 +33,21 @@ int main(void)
     bubbleSort(arr1, TAMANHO);
     fim = clock();
     tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
-    printf("Tempo de execucao do Bubble Sort: %f segundos\n", tempo);
+    printf("Tempo de execução do Bubble Sort: %f segundos\n", tempo);
 
     // Ordenação por seleção
     inicio = clock();
     selectionSort(arr2, TAMANHO);
     fim = clock();
     tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
-    printf("Tempo de execucao do Selection Sort: %f segundos\n", tempo);
+    printf("Tempo de execução do Selection Sort: %f segundos\n", tempo);
 
     // ordenação por inserção
     inicio = clock();
     insertionSort(arr3, TAMANHO);
     fim = clock();
     tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
-    printf("Tempo de execucao do Insertion Sort: %f segundos\n", tempo);
+    printf("Tempo de execução do Insertion Sort: %f segundos\n", tempo);
 
     return 0;
 }
