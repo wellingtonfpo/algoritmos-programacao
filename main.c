@@ -3,7 +3,7 @@
 #include <time.h>
 #include <locale.h>
 
-#define TAMANHO 10000
+#define TAMANHO 200000
 
 void selectionSort(int *V, int N);
 void bubbleSort(int *V, int N);
@@ -15,9 +15,20 @@ int main(void)
 {
     setlocale(LC_ALL, "Portuguese");
 
-    int arr1[TAMANHO];
-    int arr2[TAMANHO];
-    int arr3[TAMANHO];
+    int *arr1;
+    int *arr2;
+    int *arr3;
+
+    arr1 = (int *)malloc(TAMANHO * sizeof(int));
+    arr2 = (int *)malloc(TAMANHO * sizeof(int));
+    arr3 = (int *)malloc(TAMANHO * sizeof(int));
+
+    if (arr1 == NULL || arr2 == NULL || arr3 == NULL)
+    {
+        printf("Erro de alocação de memória!\n");
+        return 1;
+    }
+
     clock_t inicio, fim;
     double tempo;
 
@@ -35,6 +46,9 @@ int main(void)
     tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
     printf("Tempo de execução do Bubble Sort: %f segundos\n", tempo);
 
+    free(arr1);
+    arr1 = NULL;
+
     // Ordenação por seleção
     inicio = clock();
     selectionSort(arr2, TAMANHO);
@@ -42,12 +56,18 @@ int main(void)
     tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
     printf("Tempo de execução do Selection Sort: %f segundos\n", tempo);
 
+    free(arr2);
+    arr2 = NULL;
+
     // ordenação por inserção
     inicio = clock();
     insertionSort(arr3, TAMANHO);
     fim = clock();
     tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
     printf("Tempo de execução do Insertion Sort: %f segundos\n", tempo);
+
+    free(arr3);
+    arr3 = NULL;
 
     return 0;
 }
