@@ -9,7 +9,6 @@
 void selectionSort(int *V, int N);
 void bubbleSort(int *V, int N);
 void insertionSort(int *V, int N);
-
 void mergeSort(int *V, int inicio, int fim);
 void merge(int *V, int inicio, int meio, int fim);
 
@@ -28,10 +27,6 @@ int main(void)
     if (arr1 == NULL || arr2 == NULL || arr3 == NULL || arr4 == NULL)
     {
         printf("Erro de alocação de memória!\n");
-        if (arr1 != NULL) free(arr1);
-        if (arr2 != NULL) free(arr2);
-        if (arr3 != NULL) free(arr3);
-        if (arr4 != NULL) free(arr4);
         return 1;
     }
 
