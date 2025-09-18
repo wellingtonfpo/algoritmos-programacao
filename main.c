@@ -4,27 +4,30 @@
 #include <locale.h>
 #include <math.h>
 
-#define TAMANHO 100000
+#define TAMANHO 150000
 
 void selectionSort(int *V, int N);
 void bubbleSort(int *V, int N);
 void insertionSort(int *V, int N);
 void mergeSort(int *V, int inicio, int fim);
 void merge(int *V, int inicio, int meio, int fim);
+void quickSort(int *V, int inicio, int fim);
+int partition(int *V, int inicio, int fim);
 
 void printArray(int *V, int N);
-void gerarArrayDescrescente(int *V, int N);
+void gerarArrayDecrescente(int *V, int N);
 
 int main(void)
 {
     setlocale(LC_ALL, "Portuguese");
 
     int *arr1 = (int *) malloc(TAMANHO * sizeof(int));
-    int *arr2 = (int *) malloc(TAMANHO * sizeof(int));
+    // int *arr2 = (int *) malloc(TAMANHO * sizeof(int));
     int *arr3 = (int *) malloc(TAMANHO * sizeof(int));
     int *arr4 = (int *) malloc(TAMANHO * sizeof(int));
+    int *arr5 = (int *) malloc(TAMANHO * sizeof(int));
 
-    if (arr1 == NULL || arr2 == NULL || arr3 == NULL || arr4 == NULL)
+    if (arr3 == NULL || arr4 == NULL || arr5 == NULL)
     {
         printf("Erro de alocação de memória!\n");
         return 1;
@@ -33,34 +36,35 @@ int main(void)
     clock_t inicio, fim;
     double tempo;
 
-    gerarArrayDescrescente(arr1, TAMANHO);
+    gerarArrayDecrescente(arr1, TAMANHO);
     for (int i = 0; i < TAMANHO; i++)
     {
-        arr2[i] = arr1[i];
+        // arr2[i] = arr1[i];
         arr3[i] = arr1[i];
         arr4[i] = arr1[i];
+        arr5[i] = arr1[i];
     }
 
-    // Ordenação por bolha
-    inicio = clock();
-    bubbleSort(arr1, TAMANHO);
-    fim = clock();
-    tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
-    printf("Tempo de execução do Bubble Sort: %f segundos\n", tempo);
-
-    free(arr1);
-    arr1 = NULL;
-
-    // Ordenação por seleção
-    inicio = clock();
-    selectionSort(arr2, TAMANHO);
-    fim = clock();
-    tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
-    printf("Tempo de execução do Selection Sort: %f segundos\n", tempo);
-
-    free(arr2);
-    arr2 = NULL;
-
+    // // Ordenação por bolha
+    // inicio = clock();
+    // bubbleSort(arr1, TAMANHO);
+    // fim = clock();
+    // tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
+    // printf("Tempo de execução do Bubble Sort: %f segundos\n", tempo);
+    //
+    // free(arr1);
+    // arr1 = NULL;
+    //
+    // // Ordenação por seleção
+    // inicio = clock();
+    // selectionSort(arr2, TAMANHO);
+    // fim = clock();
+    // tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
+    // printf("Tempo de execução do Selection Sort: %f segundos\n", tempo);
+    //
+    // free(arr2);
+    // arr2 = NULL;
+    //
     // ordenação por inserção
     inicio = clock();
     insertionSort(arr3, TAMANHO);
@@ -71,12 +75,25 @@ int main(void)
     free(arr3);
     arr3 = NULL;
 
-    //ordenação merge sort
+    //ordenação mergesort
     inicio = clock();
     mergeSort(arr4, 0, TAMANHO - 1);
     fim = clock();
     tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
     printf("Tempo de execução do Merge Sort: %f segundos\n", tempo);
+
+    free(arr4);
+    arr4 = NULL;
+
+    //ordenação quicksort
+    inicio = clock();
+    quickSort(arr5, 0, TAMANHO - 1);
+    fim = clock();
+    tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
+    printf("Tempo de execução do QuickSort: %f segundos\n", tempo);
+
+    free(arr5);
+    arr5 = NULL;
 
     return 0;
 }
@@ -192,7 +209,41 @@ void merge(int *V, int inicio, int meio, int fim)
     free(temp);
 }
 
-void gerarArrayDescrescente(int *V, int N)
+void quickSort(int *V, int inicio, int fim)
+{
+    if (inicio < fim)
+    {
+        int const pivo = partition(V, inicio, fim);
+        quickSort(V, inicio, pivo - 1);
+        quickSort(V, pivo + 1, fim);
+    }
+}
+
+int partition(int *V, int inicio, int fim)
+{
+    int esq, dir, pivo, aux;
+    esq = inicio;
+    dir = fim;
+    pivo = V[inicio];
+    while (esq < dir)
+    {
+        while (esq <= fim && V[esq] <= pivo) esq++;
+
+        while (dir >= 0 && V[dir] > pivo) dir--;
+
+        if (esq < dir)
+        {
+            aux = V[esq];
+            V[esq] =  V[dir];
+            V[dir] = aux;
+        }
+    }
+    V[inicio] = V[dir];
+    V[dir] = pivo;
+    return dir;
+}
+
+void gerarArrayDecrescente(int *V, int N)
 {
     for (int i = 0; i < N; i++)
     {
