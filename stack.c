@@ -22,7 +22,7 @@ Stack* start() {
     return s;
 }
 
-void push(Stack *s, char elemento);
+void push(Stack *s, char element);
 char top(Stack *s);
 char pop(Stack *s);
 int empty(Stack *s);
@@ -42,9 +42,9 @@ int main() {
     word[strcspn(word, "\n")] = '\0';
 
     if (isPalindrome(word)) {
-        printf("Word: %s is palindrome\n", word);
+        printf("Word: [%s] is palindrome\n", word);
     } else {
-        printf("Word: %s is not palindrome\n", word);
+        printf("Word: [%s] is not palindrome\n", word);
     }
 
     free(s);
