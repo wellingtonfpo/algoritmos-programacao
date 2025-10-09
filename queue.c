@@ -26,6 +26,7 @@ char dequeue(Queue* q);
 int size(const Queue* q);
 char head(const Queue* q);
 int empty(const Queue* q);
+void displayQueue(const Queue* q);
 
 int main() {
     Queue* q = start();
@@ -37,20 +38,9 @@ int main() {
     enqueue(q, '@');
     enqueue(q, '#');
     enqueue(q, '$');
+    enqueue(q, '%');
 
-    printf("Queue size: %d\n", size(q));
-    printf("Head: %c\n", head(q));
-    printf("\n");
-
-    printf("Dequeued: %c\n", dequeue(q));
-    printf("Queue size: %d\n", size(q));
-    printf("Head: %c\n", head(q));
-    printf("\n");
-
-    printf("Dequeued: %c\n", dequeue(q));
-    printf("Queue size: %d\n", size(q));
-    printf("Head: %c\n", head(q));
-
+    displayQueue(q);
 
     free(q);
     q = NULL;
@@ -103,4 +93,10 @@ char head(const Queue* q) {
 
 int empty(const Queue* q) {
     return q->size == 0;
+}
+
+void displayQueue(const Queue* q) {
+    for (const Element* e = q->head; e != NULL; e = e->next) {
+        printf("%c ", e->value);
+    }
 }

@@ -87,8 +87,8 @@ int full() {
     return quantity == SIZE;
 }
 
-void showQueue(char *V, int size) {
+void showQueue(char *Q, int size) {
     for (int i = 0; i < size; i++) {
-        printf("Position %d -> %c\n", i, V[i]);
+        printf("Position %d -> %c\n", i, Q[i]);
     }
 }
