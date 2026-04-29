@@ -1,15 +1,15 @@
 #include <stdio.h>
 
-int xor(const int a, const int b) {
-    return (a || b) && !(a && b);
-}
-
 int and(const int a, const int b) {
     return a && b;
 }
 
 int or(const int a, const int b) {
     return a || b;
+}
+
+int xor(const int a, const int b) {
+    return (a || b) && !(a && b);
 }
 
 int main() {
