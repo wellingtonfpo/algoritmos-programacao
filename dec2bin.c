@@ -23,4 +23,23 @@ int main(int argc, char *argv[]) {
         printf("Base 10: 0 -> Base 2: 0\n");
         return 0;
     }
+
+    int binary[64];
+    int index = 0;
+
+    while (numero_decimal > 0 ) {
+        binary[index] = numero_decimal % 2;
+        numero_decimal = numero_decimal / 2;
+        index++;
+    }
+
+    printf("Base 10: %d -> Base 2: ", numero_original);
+
+    for (int j = index - 1; j >= 0; j--) {
+        printf("%d", binary[j]);
+    }
+
+    printf("\n");
+
+    return 0;
 }
